@@ -83,7 +83,7 @@
       .slide::before {
         content: "";
         position: absolute;
-        top: 50%;
+        top: 45%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 90%;
@@ -100,7 +100,7 @@
       .question {
         font-size: 2rem;
         font-weight: 700;
-        margin-bottom: 3rem;
+        margin-bottom: 1rem;
         text-align: center;
         color: white;
         text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -177,10 +177,10 @@
       }
 
       .result {
-        font-size: 2.2rem;
+        font-size: 1.5rem;
         font-weight: 800;
         text-align: center;
-        padding: 2rem;
+        padding: 0.5rem;
         color: black;
         text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         line-height: 1.4;
@@ -193,7 +193,7 @@
         margin-top: 2rem;
         flex-wrap: wrap;
         justify-content: center;
-        margin-bottom: 18px; /* 푸터와의 간격 추가 */
+        margin-bottom: 60px; /* 기존 18px → 60px로 증가 */
       }
 
       .share-buttons button {
@@ -274,7 +274,7 @@
       .upload-message {
         font-size: 1rem;
         font-weight: 500;
-        margin-bottom: 1.5rem;
+        margin-bottom: -0.5rem;
         text-align: center;
         color: white;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -285,18 +285,39 @@
         background: var(--glass-bg);
         backdrop-filter: blur(20px);
         border-radius: 25px;
-        padding: 2rem;
+        padding: 1rem;
         border: 1px solid var(--glass-border);
         box-shadow: var(--shadow-light);
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
       }
 
       /* 결과 페이지 특별 스타일 */
+      /* 결과 페이지 특별 스타일 - 내용에 맞춰 높이 조정 */
       .slide:last-child {
         justify-content: flex-start;
-        padding-top: 3rem;
-        padding-bottom: 3rem;
+        padding-top: 2rem;
+        padding-bottom: 100px;
+        min-height: calc(100vh - 80px); /* 최소 높이는 다른 슬라이드와 동일 */
+        height: auto; /* 내용이 많을 때만 자동으로 늘어남 */
       }
+
+      /* 결과 슬라이드의 배경 조정 */
+    .slide:last-child::before {
+       position: absolute;
+      top: 10%; /* 상단에서 10% 위치 */
+      left: 50%;
+      transform: translateX(-50%); /* X축만 중앙 정렬 */
+      width: 90%;
+      max-width: 500px;
+      height: calc(100% - 20%); /* 상하 여백 10%씩 제외 */
+      min-height: 600px; /* 최소 높이 보장 */
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-light);
+      z-index: -1;
+    }
 
       /* 반응형 디자인 */
       @media (max-width: 768px) {
@@ -311,7 +332,7 @@
         }
 
         .result {
-          font-size: 1.7rem;
+          font-size: 1.5rem;
         }
 
         .top-header {
@@ -336,13 +357,16 @@
         }
 
         .slide:last-child {
-          padding-top: 2rem;
-          padding-bottom: 2rem;
+          padding-top: 1.5rem; /* 기존 2rem → 1.5rem */
+          padding-bottom: 80px; /* 기존 2rem → 80px */
+          min-height: auto; /* 새로 추가 */
+          height: auto; /* 새로 추가 */
         }
 
         .share-buttons {
           flex-direction: column;
           align-items: center;
+          margin-bottom: 80px; /* 새로 추가 */
         }
 
         .share-buttons button {
@@ -375,6 +399,22 @@
           max-width: 200px;
           max-height: 250px;
         }
+
+        .slide:last-child {
+        padding-top: 1rem; /* 기존 값 유지 */
+        padding-bottom: 70px; /* 기존 값에서 70px로 변경 */
+        min-height: auto; /* 새로 추가 */
+        height: auto; /* 새로 추가 */
+      }
+
+
+      .share-buttons {
+        margin-bottom: 70px; /* 새로 추가 */
+      }
+        .share-buttons button {
+          width: 100%;
+          max-width: 200px;
+        }
       }
 
       @media (max-width: 320px) {
@@ -400,8 +440,14 @@
         }
 
         .slide:last-child {
-          padding-top: 1.5rem;
-          padding-bottom: 1.5rem;
+          padding-top: 1rem; /* 기존 1.5rem → 1rem */
+          padding-bottom: 70px; /* 기존 1.5rem → 70px */
+          min-height: auto; /* 새로 추가 */
+          height: auto; /* 새로 추가 */
+        }
+
+        .share-buttons {
+          margin-bottom: 70px; /* 새로 추가 */
         }
 
         .question {
@@ -459,7 +505,7 @@
       #capture-title {
         text-align: center;
         font-size: 1.8rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         font-weight: 690;
         color: #0d1b2a; /* 또는 white, 배경에 따라 */
       }
@@ -478,6 +524,26 @@
 
       #preview:hover {
         transform: scale(1.05);
+      }
+
+      @media (max-width: 400px) {
+        .buttons {
+          align-items: center;
+        }
+        .btn {
+          width: 70%;
+          min-width: 80px;
+          max-width: 200px;
+          margin: 0 auto;
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+        }
+        .question {
+          font-size: 1.1rem;
+        }
+        .result {
+          font-size: 1rem;
+        }
       }
     </style>
     <link rel="icon" href="bike.ico" type="image/x-icon" />
@@ -555,7 +621,7 @@
       </div>
       <div class="slide">
         <div class="question">
-          10. 자전거 용품(헬멧, 의류 등)에 관심이 많다.
+          10. 자전거 용품(헬멧, 의류 등)에<br/> 관심이 많다.
         </div>
         <div class="buttons">
           <button class="btn" data-score="10">매우 그렇다</button>
@@ -572,7 +638,7 @@
         </div>
 
         <p class="upload-message">
-          🚴 나만의 자전거 사진과 함께 자덕력 인증샷 공유해요!
+          🚴 나만의 자전거 사진과 함께<br/>자덕력 인증샷 공유해요!
         </p>
 
         <div class="file-input-wrapper">
@@ -615,19 +681,19 @@
         let message = "";
         if (score <= 20) {
           message =
-            "🟢 입문 자덕\n아직 자덕의 길은 멀어요! 자전거의 세계에 오신 걸 환영합니다.";
+            "🟢 입문 자덕\n아직 자덕의 길은 멀어요!\n자전거의 세계에 오신 걸 환영합니다.";
         } else if (score <= 50) {
           message =
-            "🔵 중급 자덕\n조금씩 덕후의 기운이 느껴져요! 이제 자전거가 친구보다 더 좋아질지도?";
+            "🔵 중급 자덕\n조금씩 덕후의 기운이 느껴져요!\n이제 자전거가 친구보다 더 좋아질지도?";
         } else if (score <= 70) {
           message =
-            "🔧 상급 자덕\n제법 진심이네요. 자전거 없이는 못 사는 단계!";
+            "🔧 상급 자덕\n제법 진심이네요.\n자전거 없이는 못 사는 단계!";
         } else if (score < 90) {
           message =
-            "🚴‍♂️ 최상급 자덕\n완벽한 자덕, 존경합니다. 동호회에서 이미 유명인!";
+            "🚴‍♂️ 최상급 자덕\n완벽한 자덕, 존경합니다.\n동호회에서 이미 유명인!";
         } else {
           message =
-            "🌟 레전드 자덕\n자전거가 곧 인생! 자덕계의 신, 당신을 모두가 우러러봅니다!";
+            "🌟 레전드 자덕\n자전거가 곧 인생!\n자덕계의 신, 당신을 모두가 우러러봅니다!";
         }
 
         // 공유용 텍스트 (순수 텍스트)
@@ -820,28 +886,31 @@
       }
 
       function restartTest() {
-        currentSlide = 0;
-        score = 0;
-        resultString = "";
+          currentSlide = 0;
+          score = 0;
+          resultString = "";
 
-        // 슬라이더를 첫 번째 슬라이드로 이동
-        slider.style.transform = "translateX(0)";
+          // 페이지를 최상단으로 스크롤
+          window.scrollTo(0, 0);
 
-        // 결과 텍스트 초기화
-        resultText.innerHTML = "결과 계산 중...";
+          // 슬라이더를 첫 번째 슬라이드로 이동
+          slider.style.transform = "translateX(0)";
 
-        // 이미지 미리보기 초기화
-        preview.style.display = "none";
-        preview.src = "#";
+          // 결과 텍스트 초기화
+          resultText.innerHTML = "결과 계산 중...";
 
-        // 파일 입력 초기화
-        imageUpload.value = "";
+          // 이미지 미리보기 초기화
+          preview.style.display = "none";
+          preview.src = "#";
 
-        // 모든 버튼의 선택 상태 초기화 (시각적 피드백을 위해)
-        buttons.forEach((btn) => {
-          btn.style.transform = "translateY(0) scale(1)";
-          btn.style.boxShadow = "0 4px 15px rgba(0, 0, 0, 0.1)";
-        });
+          // 파일 입력 초기화
+          imageUpload.value = "";
+
+          // 모든 버튼의 선택 상태 초기화 (시각적 피드백을 위해)
+          buttons.forEach((btn) => {
+              btn.style.transform = "translateY(0) scale(1)";
+              btn.style.boxShadow = "0 4px 15px rgba(0, 0, 0, 0.1)";
+          });
       }
 
       // 더블클릭(더블탭) 방지
