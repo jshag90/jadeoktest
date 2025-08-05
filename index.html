@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>자덕력 테스트</title>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --text-primary: #2d3748;
+  --text-secondary: #718096;
+  --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.37);
+  --shadow-medium: 0 20px 40px rgba(0, 0, 0, 0.1);
+  --shadow-heavy: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+body {
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  width: 100vw;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 80px;
+}
+
+.slide {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  position: relative;
+  min-height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+.slide::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  height: 80%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-light);
+  z-index: -1;
+}
+
+.question {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: white;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  line-height: 1.4;
+  max-width: 400px;
+  animation: slideInUp 0.8s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 350px;
+  animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+.btn {
+  padding: 1.2rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
+  border: 2px solid transparent;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.result {
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-align: center;
+  padding: 2rem;
+  color: black;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  line-height: 1.4;
+  animation: slideInUp 0.8s ease-out;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.share-buttons button {
+  background: var(--dark-gradient);
+  color: white;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.share-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.file-input-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-top: 1.5rem;
+}
+
+input[type="file"] {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.file-input-label {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.file-input-label:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.top-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 80px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+  color: white;
+  font-size: 2rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+.upload-message {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: slideInUp 0.8s ease-out 0.4s both;
+}
+
+#capture-area {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border-radius: 25px;
+  padding: 2rem;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-light);
+  margin-bottom: 2rem;
+}
+
+/* 결과 페이지 특별 스타일 */
+.slide:last-child {
+  justify-content: flex-start;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .question {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+  
+  .btn {
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+  }
+  
+  .result {
+    font-size: 1.7rem;
+  }
+  
+  .top-header {
+    font-size: 1.6rem;
+    height: 70px;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .container {
+    min-height: calc(100vh - 70px);
+    margin-top: 70px;
+  }
+  
+  .slide {
+    min-height: calc(100vh - 70px);
+  }
+  
+  .slide:last-child {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  .share-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .share-buttons button {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slide {
+    min-height: calc(100vh - 60px);
+    padding: 1rem;
+  }
+  
+  .slide:last-child {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  .question {
+    font-size: 1.4rem;
+  }
+  
+  .btn {
+    font-size: 0.95rem;
+    padding: 0.9rem 1.2rem;
+  }
+  
+  .result {
+    font-size: 1.6rem;
+    padding: 1.5rem;
+  }
+  
+  #capture-area {
+    padding: 1.5rem;
+  }
+  
+  .top-header {
+    font-size: 1.4rem;
+    height: 60px;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(15px);
+  }
+  
+  .container {
+    min-height: calc(100vh - 60px);
+    margin-top: 60px;
+  }
+  
+  #preview {
+    max-width: 250px;
+    max-height: 350px;
+  }
+}
+
+@media (max-width: 320px) {
+  .top-header {
+    font-size: 1.2rem;
+    height: 55px;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .container {
+    min-height: calc(100vh - 55px);
+    margin-top: 55px;
+  }
+  
+  .slide {
+    min-height: calc(100vh - 55px);
+  }
+  
+  .slide:last-child {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  
+  .question {
+    font-size: 1.2rem;
+  }
+  
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.8rem 1rem;
+  }
+  
+  #preview {
+    max-width: 220px;
+    max-height: 300px;
+  }
+}
+
+/* 다크모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .btn {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+  }
+  
+  .file-input-label {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+  }
+}
+
+/* 애니메이션 개선 */
+.slide.active .question {
+  animation: slideInUp 0.8s ease-out;
+}
+
+.slide.active .buttons {
+  animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+/* 로딩 애니메이션 */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+#capture-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: 690;
+  color: #0D1B2A; /* 또는 white, 배경에 따라 */
+}
+
+#preview {
+  max-width: 280px;
+  max-height: 400px;
+  margin: 1.5rem auto;
+  display: none;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: var(--shadow-medium);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease;
+}
+
+#preview:hover {
+  transform: scale(1.05);
+}
+
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+    <header class="top-header">
+        🚴 자덕력 테스트
+    </header>
+      
+
+  <div id="slider" class="container">
+    <div class="slide">
+      <div class="question">1. FTP 테스트가 무엇인지 알고 있다.</div>
+      <div class="buttons">
+        <button class="btn" data-score="10">예</button>
+        <button class="btn" data-score="0">아니오</button>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="question">2. 스트라바는 매일 확인한다.</div>
+      <div class="buttons">
+        <button class="btn" data-score="10">예</button>
+        <button class="btn" data-score="0">아니오</button>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="question">3. 자전거 탈 때 파워미터를 사용한다.</div>
+      <div class="buttons">
+        <button class="btn" data-score="10">예</button>
+        <button class="btn" data-score="0">아니오</button>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="question">4. 평소 주말에 주로 뭘 하시나요?</div>
+      <div class="buttons">
+        <button class="btn" data-score="10">라이딩</button>
+        <button class="btn" data-score="3">등산</button>
+        <button class="btn" data-score="0">집콕</button>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="question">5. 자전거 정비는 어떻게 하나요?</div>
+      <div class="buttons">
+        <button class="btn" data-score="10">내가 직접</button>
+        <button class="btn" data-score="5">샵에 맡김</button>
+        <button class="btn" data-score="0">안 함</button>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="question">6. 보유 중인 자전거 수는?</div>
+      <div class="buttons">
+        <button class="btn" data-score="10">2대 이상</button>
+        <button class="btn" data-score="5">1대</button>
+        <button class="btn" data-score="0">없음</button>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="question">7. 자전거 여행(투어)을 떠나본 적이 있다.</div>
+      <div class="buttons">
+        <button class="btn" data-score="10">예</button>
+        <button class="btn" data-score="0">아니오</button>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="question">8. 자전거 동호회 가입 여부는?</div>
+      <div class="buttons">
+        <button class="btn" data-score="10">예</button>
+        <button class="btn" data-score="0">아니오</button>
+      </div>
+    </div>
+
+    <div class="slide">
+       
+        <div id="capture-area">
+          <h2 id="capture-title">🚴 자덕력 테스트</h2>
+          <div class="result" id="result">결과 계산 중...</div>
+          <img id="preview" src="#" alt="내 자전거 이미지" />
+        </div>
+
+        <p class="upload-message">🚴 나만의 자전거 사진과 함께 자덕력 인증샷 공유해요!</p>
+      
+        <div class="file-input-wrapper">
+          <input type="file" id="imageUpload" accept="image/*" />
+          <label for="imageUpload" class="file-input-label">📷 사진 업로드</label>
+        </div>
+        
+        <div class="share-buttons">
+          <button onclick="restartTest()">🔄 다시하기</button>
+          <button onclick="downloadImage()">💾 결과 이미지 저장</button>
+          <button onclick="shareResult()">📤 공유하기</button>
+        </div>
+      </div>
+      
+  </div>
+
+  <script>
+    const slider = document.getElementById("slider");
+    const slides = document.querySelectorAll(".slide");
+    const totalSlides = slides.length - 1;
+    const buttons = document.querySelectorAll(".btn");
+    const resultText = document.getElementById("result");
+    const imageUpload = document.getElementById("imageUpload");
+    const preview = document.getElementById("preview");
+
+    let currentSlide = 0;
+    let score = 0;
+    let resultString = "";
+
+    const goToNextSlide = () => {
+      currentSlide++;
+      slider.style.transform = `translateX(-${100 * currentSlide}vw)`;
+      if (currentSlide === totalSlides) {
+        showResult();
+      }
+    };
+
+    const showResult = () => {
+        let message = "";
+
+        if (score <= 20) message = "🟢 입문 자덕\n아직 자덕의 길은 멀어요!";
+        else if (score <= 50) message = "🔵 중급 자덕\n조금씩 덕후의 기운이 느껴져요!";
+        else if (score <= 70) message = "🔧 상급 자덕\n제법 진심이네요.";
+        else message = "🚴‍♂️ 최상급 자덕\n완벽한 자덕, 존경합니다.";
+
+        // 공유용 텍스트 (순수 텍스트)
+        resultString = `당신은 ${message}\n총 점수: ${score}점`;
+        
+        // 화면 표시용 HTML
+        const displayHTML = `당신은 ${message.replace(/\n/g, '<br>')} <br>총 점수: ${score}점`;
+        resultText.innerHTML = displayHTML;
+    };
+
+
+    buttons.forEach((btn) =>
+      btn.addEventListener("click", (e) => {
+        const value = parseInt(e.target.getAttribute("data-score"));
+        score += value;
+        goToNextSlide();
+      })
+    );
+
+     // 이미지 업로드 미리보기
+     imageUpload.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+          preview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // 공유 기능 (사용하지 않는 함수 제거)
+    function share() {
+      shareResult();
+    }
+
+    function downloadImage() {
+      const captureArea = document.getElementById("capture-area");
+
+      // 캡처 전에 원래 스타일 저장
+      const originalStyle = captureArea.style.cssText;
+
+      // 배경과 글자색 지정 - 투명도 문제 해결
+      captureArea.style.background = 'linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 50%, #90CAF9 100%)'; // 하늘색 그라데이션
+      captureArea.style.color = '#0D1B2A';
+      captureArea.style.padding = '2rem';
+      captureArea.style.borderRadius = '20px';
+      captureArea.style.backdropFilter = 'none'; // backdrop-filter 제거
+      captureArea.style.backgroundColor = '#E3F2FD'; // 하늘색 배경
+
+      // 자식 요소 글자색도 강제 설정 - !important 사용
+      captureArea.querySelectorAll("*").forEach(el => {
+        el.style.setProperty('color', '#0D1B2A', 'important');
+        el.style.setProperty('opacity', '1', 'important');
+        el.style.setProperty('font-weight', '700', 'important');
+        el.style.setProperty('text-shadow', 'none', 'important');
+        el.style.setProperty('background-color', 'transparent', 'important');
+        // backdrop-filter가 있는 요소들도 제거
+        if (el.style.backdropFilter) {
+          el.style.setProperty('backdrop-filter', 'none', 'important');
+        }
+      });
+
+      const title = document.getElementById("capture-title");
+      if (title) {
+        title.style.setProperty('color', '#0D1B2A', 'important');
+        title.style.setProperty('font-weight', '700', 'important');
+        title.style.setProperty('text-shadow', 'none', 'important');
+        title.style.setProperty('opacity', '1', 'important');
+      }
+
+      const result = document.getElementById("result");
+      if (result) {
+        result.style.setProperty('color', '#0D1B2A', 'important');
+        result.style.setProperty('font-weight', '700', 'important');
+        result.style.setProperty('opacity', '1', 'important');
+        result.style.setProperty('text-shadow', 'none', 'important');
+        // 결과 텍스트의 모든 자식 요소도 강제 설정
+        result.querySelectorAll("*").forEach(el => {
+          el.style.setProperty('color', '#0D1B2A', 'important');
+          el.style.setProperty('opacity', '1', 'important');
+          el.style.setProperty('font-weight', '700', 'important');
+          el.style.setProperty('text-shadow', 'none', 'important');
+        });
+      }
+
+      // 스타일 적용 대기 후 캡처
+      setTimeout(() => {
+                 html2canvas(captureArea, {
+           backgroundColor: '#E3F2FD', // 하늘색 배경색 설정
+          scale: 2,
+          logging: false,
+          useCORS: true,
+          allowTaint: true,
+          ignoreElements: (element) => {
+            // 외부 리소스나 문제가 될 수 있는 요소들 무시
+            return element.tagName === 'LINK' || 
+                   element.tagName === 'SCRIPT' ||
+                   element.classList.contains('top-header');
+          },
+                     onclone: (clonedDoc) => {
+             // 클론된 문서에서 추가 스타일 적용
+             const clonedCaptureArea = clonedDoc.getElementById('capture-area');
+             if (clonedCaptureArea) {
+               clonedCaptureArea.style.background = 'linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 50%, #90CAF9 100%)';
+               clonedCaptureArea.style.color = '#0D1B2A';
+               clonedCaptureArea.style.opacity = '1';
+              
+              // 클론된 문서의 모든 텍스트 요소에 강제 스타일 적용
+              clonedCaptureArea.querySelectorAll('*').forEach(el => {
+                el.style.setProperty('color', '#0D1B2A', 'important');
+                el.style.setProperty('opacity', '1', 'important');
+                el.style.setProperty('font-weight', '700', 'important');
+                el.style.setProperty('text-shadow', 'none', 'important');
+              });
+            }
+          }
+        }).then((canvas) => {
+          const link = document.createElement("a");
+          link.download = "자덕력 테스트 결과.png";
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+
+          // 원래 스타일 복원
+          captureArea.style.cssText = originalStyle;
+        }).catch((error) => {
+          console.error('이미지 생성 실패:', error);
+          alert('이미지 저장에 실패했습니다. 다시 시도해주세요.');
+
+          // 에러 발생 시에도 복원
+          captureArea.style.cssText = originalStyle;
+        });
+      }, 100);
+    }
+
+
+    function shareResult() {
+      const shareText = `${resultString}\n\n자덕력 테스트 바로가기: https://jshag90.github.io/jadeoktest`;
+      const shareUrl = "https://jshag90.github.io/jadeoktest";
+      console.log("공유할 텍스트: " + shareText);
+      
+      if (navigator.share) {
+        // 모바일: 네이티브 공유 메뉴 (intent 형태로 전달)
+        navigator.share({
+          title: "나는 자덕일까? - 자덕력 테스트",
+          text: shareText,
+          url: shareUrl
+        }).catch(err => {
+          console.log("공유 취소 또는 실패");
+          // 모바일에서도 실패 시 클립보드 복사
+          copyToClipboard(shareText);
+        });
+      } else {
+        // PC: 클립보드에 텍스트 복사
+        copyToClipboard(shareText);
+      }
+    }
+
+    function copyToClipboard(text) {
+      const textToCopy = text || `${resultString}\n\n자덕력 테스트 바로가기: https://jshag90.github.io/jadeoktest`;
+      
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("결과가 클립보드에 복사되었습니다!");
+      }).catch(() => {
+        // 클립보드 API가 실패할 경우 대체 방법
+        const textArea = document.createElement('textarea');
+        textArea.value = textToCopy;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        alert("결과가 클립보드에 복사되었습니다!");
+      });
+    }
+
+    function restartTest() {
+    
+        currentSlide = 0;
+        score = 0;
+        resultString = "";
+        
+        // 슬라이더를 첫 번째 슬라이드로 이동
+        slider.style.transform = 'translateX(0)';
+        
+        // 결과 텍스트 초기화
+        resultText.innerHTML = "결과 계산 중...";
+        
+        // 이미지 미리보기 초기화
+        preview.style.display = "none";
+        preview.src = "#";
+        
+        // 파일 입력 초기화
+        imageUpload.value = "";
+        
+        // 모든 버튼의 선택 상태 초기화 (시각적 피드백을 위해)
+        buttons.forEach(btn => {
+          btn.style.transform = 'translateY(0) scale(1)';
+          btn.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+        });
+  
+    }
+
+  </script>
+</body>
+</html>
