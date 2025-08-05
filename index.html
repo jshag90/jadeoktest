@@ -193,6 +193,7 @@
         margin-top: 2rem;
         flex-wrap: wrap;
         justify-content: center;
+        margin-bottom: 18px; /* 푸터와의 간격 추가 */
       }
 
       .share-buttons button {
@@ -774,7 +775,7 @@
 
       function shareResult() {
         const shareText = `${resultString}\n\n자덕력 테스트 바로가기:\n`;
-        const shareUrl = "https://jshag90.github.io/jadeoktest";
+        const shareUrl = "https://jadeoktest.web.app/";
         console.log("공유할 텍스트: " + shareText);
 
         if (navigator.share) {
@@ -799,7 +800,7 @@
       function copyToClipboard(text) {
         const textToCopy =
           text ||
-          `${resultString}\n\n자덕력 테스트 바로가기: https://jshag90.github.io/jadeoktest`;
+          `${resultString}\n\n자덕력 테스트 바로가기: https://jadeoktest.web.app`;
 
         navigator.clipboard
           .writeText(textToCopy)
@@ -868,9 +869,8 @@
         background: rgba(0, 0, 0, 0.85);
         color: #fff;
         text-align: center;
-        font-size: 1rem;
-        font-weight: 500;
-        padding: 9px 0 7px 0;
+        font-size: 0.7rem;
+        padding: 7px 0 5px 0; /* 높이 2px 줄임 */
         position: fixed;
         left: 0;
         right: 0;
