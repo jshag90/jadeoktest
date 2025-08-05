@@ -539,6 +539,23 @@
           <button class="btn" data-score="0">아니오</button>
         </div>
       </div>
+      <div class="slide">
+        <div class="question">9. 자전거 관련 유튜브 채널을 구독하고 있다.</div>
+        <div class="buttons">
+          <button class="btn" data-score="10">예</button>
+          <button class="btn" data-score="0">아니오</button>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="question">
+          10. 자전거 용품(헬멧, 의류 등)에 관심이 많다.
+        </div>
+        <div class="buttons">
+          <button class="btn" data-score="10">매우 그렇다</button>
+          <button class="btn" data-score="5">보통이다</button>
+          <button class="btn" data-score="0">별로 없다</button>
+        </div>
+      </div>
 
       <div class="slide">
         <div id="capture-area">
@@ -589,12 +606,22 @@
 
       const showResult = () => {
         let message = "";
-
-        if (score <= 20) message = "🟢 입문 자덕\n아직 자덕의 길은 멀어요!";
-        else if (score <= 50)
-          message = "🔵 중급 자덕\n조금씩 덕후의 기운이 느껴져요!";
-        else if (score <= 70) message = "🔧 상급 자덕\n제법 진심이네요.";
-        else message = "🚴‍♂️ 최상급 자덕\n완벽한 자덕, 존경합니다.";
+        if (score <= 20) {
+          message =
+            "🟢 입문 자덕\n아직 자덕의 길은 멀어요! 자전거의 세계에 오신 걸 환영합니다.";
+        } else if (score <= 50) {
+          message =
+            "🔵 중급 자덕\n조금씩 덕후의 기운이 느껴져요! 이제 자전거가 친구보다 더 좋아질지도?";
+        } else if (score <= 70) {
+          message =
+            "🔧 상급 자덕\n제법 진심이네요. 자전거 없이는 못 사는 단계!";
+        } else if (score < 90) {
+          message =
+            "🚴‍♂️ 최상급 자덕\n완벽한 자덕, 존경합니다. 동호회에서 이미 유명인!";
+        } else {
+          message =
+            "🌟 레전드 자덕\n자전거가 곧 인생! 자덕계의 신, 당신을 모두가 우러러봅니다!";
+        }
 
         // 공유용 텍스트 (순수 텍스트)
         resultString = `당신은 ${message}\n총 점수: ${score}점`;
