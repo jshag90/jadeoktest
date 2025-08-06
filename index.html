@@ -302,22 +302,22 @@
       }
 
       /* 결과 슬라이드의 배경 조정 */
-    .slide:last-child::before {
-       position: absolute;
-      top: 10%; /* 상단에서 10% 위치 */
-      left: 50%;
-      transform: translateX(-50%); /* X축만 중앙 정렬 */
-      width: 90%;
-      max-width: 500px;
-      height: calc(100% - 20%); /* 상하 여백 10%씩 제외 */
-      min-height: 600px; /* 최소 높이 보장 */
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border-radius: 30px;
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow-light);
-      z-index: -1;
-    }
+      .slide:last-child::before {
+        position: absolute;
+        top: 10%; /* 상단에서 10% 위치 */
+        left: 50%;
+        transform: translateX(-50%); /* X축만 중앙 정렬 */
+        width: 90%;
+        max-width: 500px;
+        height: calc(100% - 20%); /* 상하 여백 10%씩 제외 */
+        min-height: 600px; /* 최소 높이 보장 */
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        border-radius: 30px;
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--shadow-light);
+        z-index: -1;
+      }
 
       /* 반응형 디자인 */
       @media (max-width: 768px) {
@@ -401,16 +401,15 @@
         }
 
         .slide:last-child {
-        padding-top: 1rem; /* 기존 값 유지 */
-        padding-bottom: 70px; /* 기존 값에서 70px로 변경 */
-        min-height: auto; /* 새로 추가 */
-        height: auto; /* 새로 추가 */
-      }
+          padding-top: 1rem; /* 기존 값 유지 */
+          padding-bottom: 70px; /* 기존 값에서 70px로 변경 */
+          min-height: auto; /* 새로 추가 */
+          height: auto; /* 새로 추가 */
+        }
 
-
-      .share-buttons {
-        margin-bottom: 70px; /* 새로 추가 */
-      }
+        .share-buttons {
+          margin-bottom: 70px; /* 새로 추가 */
+        }
         .share-buttons button {
           width: 100%;
           max-width: 200px;
@@ -527,8 +526,13 @@
       }
 
       @media (max-width: 400px) {
+        .question {
+          font-size: 1.1rem;
+          margin-top: -50px; /* 위로 10px 이동 */
+        }
         .buttons {
           align-items: center;
+          margin-top: -10px; /* 위로 10px 이동 */
         }
         .btn {
           width: 70%;
@@ -538,11 +542,14 @@
           padding-left: 0.5rem;
           padding-right: 0.5rem;
         }
-        .question {
-          font-size: 1.1rem;
-        }
         .result {
           font-size: 1rem;
+        }
+        .slide::before {
+          content: "";
+          position: absolute;
+          top: 42%;
+          height: 70%;
         }
       }
     </style>
@@ -621,7 +628,8 @@
       </div>
       <div class="slide">
         <div class="question">
-          10. 자전거 용품(헬멧, 의류 등)에<br/> 관심이 많다.
+          10. 자전거 용품(헬멧, 의류 등)에<br />
+          관심이 많다.
         </div>
         <div class="buttons">
           <button class="btn" data-score="10">매우 그렇다</button>
@@ -638,7 +646,7 @@
         </div>
 
         <p class="upload-message">
-          🚴 나만의 자전거 사진과 함께<br/>자덕력 인증샷 공유해요!
+          🚴 나만의 자전거 사진과 함께<br />자덕력 인증샷 공유해요!
         </p>
 
         <div class="file-input-wrapper">
@@ -886,31 +894,31 @@
       }
 
       function restartTest() {
-          currentSlide = 0;
-          score = 0;
-          resultString = "";
+        currentSlide = 0;
+        score = 0;
+        resultString = "";
 
-          // 페이지를 최상단으로 스크롤
-          window.scrollTo(0, 0);
+        // 페이지를 최상단으로 스크롤
+        window.scrollTo(0, 0);
 
-          // 슬라이더를 첫 번째 슬라이드로 이동
-          slider.style.transform = "translateX(0)";
+        // 슬라이더를 첫 번째 슬라이드로 이동
+        slider.style.transform = "translateX(0)";
 
-          // 결과 텍스트 초기화
-          resultText.innerHTML = "결과 계산 중...";
+        // 결과 텍스트 초기화
+        resultText.innerHTML = "결과 계산 중...";
 
-          // 이미지 미리보기 초기화
-          preview.style.display = "none";
-          preview.src = "#";
+        // 이미지 미리보기 초기화
+        preview.style.display = "none";
+        preview.src = "#";
 
-          // 파일 입력 초기화
-          imageUpload.value = "";
+        // 파일 입력 초기화
+        imageUpload.value = "";
 
-          // 모든 버튼의 선택 상태 초기화 (시각적 피드백을 위해)
-          buttons.forEach((btn) => {
-              btn.style.transform = "translateY(0) scale(1)";
-              btn.style.boxShadow = "0 4px 15px rgba(0, 0, 0, 0.1)";
-          });
+        // 모든 버튼의 선택 상태 초기화 (시각적 피드백을 위해)
+        buttons.forEach((btn) => {
+          btn.style.transform = "translateY(0) scale(1)";
+          btn.style.boxShadow = "0 4px 15px rgba(0, 0, 0, 0.1)";
+        });
       }
 
       // 더블클릭(더블탭) 방지
