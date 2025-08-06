@@ -514,7 +514,7 @@
       @media (max-width: 480px), (max-height: 667px) {
         .slide {
           min-height: calc(100vh - 55px);
-          padding: 0.7rem;
+          padding-bottom: 30px; /* 기존 값에서 70px로 변경 */
         }
         .container {
           min-height: calc(100vh - 55px);
@@ -664,7 +664,7 @@
       @media (max-width: 400px) {
         .question {
           font-size: 1.1rem;
-          margin-top: -90px; /* 위로 10px 이동 */
+          margin-top: -11rem;
         }
         .buttons {
           align-items: center;
@@ -685,7 +685,7 @@
           content: "";
           position: absolute;
           top: 37%;
-          height: 70%;
+          height: 68%;
         }
       }
     </style>
@@ -1078,6 +1078,17 @@
     </script>
     <footer class="modern-footer">
       <div class="footer-content">
+        <div class="app-promotion">
+          <span class="app-icon">📱</span>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.dodam.bicycleairpressuremaster"
+            class="app-link"
+          >
+            <span class="app-text">자전거공기압계산기</span>
+            <span class="app-subtitle">안드로이드 앱 다운로드</span>
+          </a>
+        </div>
+
         <div class="footer-links">
           <a href="./privacy-policy.html" class="footer-link"
             >개인정보처리방침</a
@@ -1088,17 +1099,6 @@
 
         <div class="copyright">
           © 도담소프트(DoDamSoft) 2025. All Rights Reserved.
-        </div>
-
-        <div class="app-promotion">
-          <span class="app-icon">📱</span>
-          <a
-            href="https://play.google.com/store/apps/details?id=com.dodam.bicycleairpressuremaster"
-            class="app-link"
-          >
-            <span class="app-text">자전거공기압계산기</span>
-            <span class="app-subtitle">안드로이드 앱 다운로드</span>
-          </a>
         </div>
       </div>
     </footer>
