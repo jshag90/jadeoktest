@@ -987,7 +987,7 @@
         const shareUrl = "https://jadeoktest.web.app/";
         const appUrl =
           "https://play.google.com/store/apps/details?id=com.dodam.bicycleairpressuremaster";
-        const shareText = `\n[자덕력 테스트 결과]\n${resultString}
+        const shareText = `\n${resultString}
 
 자덕력 테스트 바로가기: ${shareUrl}
 
@@ -998,8 +998,8 @@
         if (navigator.share) {
           navigator
             .share({
-              title: "자덕력 테스트",
-              text: shareText,
+              title: "[자덕력 테스트]",
+              text: shareText
             })
             .catch((err) => {
               console.log("공유 취소 또는 실패");
