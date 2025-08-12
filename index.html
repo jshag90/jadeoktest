@@ -512,49 +512,62 @@
       }
 
       @media (max-width: 480px), (max-height: 667px) {
-        .slide {
-          min-height: calc(100vh - 55px);
-          padding-top: 4.5rem;
-          padding-bottom: 5rem; /* 기존 값에서 70px로 변경 */
-          justify-content: flex-start;
-        }
-        .slide::before {
-          min-height: 300px; /* 카드 배경 최소 높이 줄임 */
-          height: 65%; /* 카드 배경 높이도 줄임 */
-          top: 35%;
-        }
         .container {
-          min-height: calc(100vh - 55px);
+          min-height: calc(100vh - 55px - 56px - 50px); /* 헤더+푸터+광고 */
           margin-top: 55px;
         }
-        .top-header {
-          font-size: 1.2rem;
-          height: 55px;
-        }
-        .result {
-          font-size: 1.3rem;
-          padding: 1rem;
-        }
-        #capture-area {
-          padding: 1rem;
-        }
-        #preview {
-          max-width: 200px;
-          max-height: 250px;
-        }
-        .slide:last-child {
-          padding-top: 1rem; /* 기존 값 유지 */
-          padding-bottom: 70px; /* 기존 값에서 70px로 변경 */
-          min-height: auto; /* 새로 추가 */
-          height: auto; /* 새로 추가 */
+        .slide {
+          min-height: calc(100vh - 55px - 56px - 50px); /* 헤더+푸터+광고 */
+          padding-top: 0.5rem;
+          padding-bottom: 1.2rem;
         }
 
-        .share-buttons {
-          margin-bottom: 70px; /* 새로 추가 */
+        .slide::before {
+          content: "";
+          position: absolute;
+          top: 38%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 90%;
+          max-width: 500px;
+          height: 68%;
+          background: var(--glass-bg);
+          backdrop-filter: blur(20px);
+          border-radius: 30px;
+          border: 1px solid var(--glass-border);
+          box-shadow: var(--shadow-light);
+          z-index: -1;
         }
-        .share-buttons button {
-          width: 100%;
-          max-width: 200px;
+
+        .slide:last-child {
+          padding-bottom: 2.2rem;
+        }
+
+        /* 결과 슬라이드의 배경 조정 */
+        .slide:last-child::before {
+          position: absolute;
+          top: 10%; /* 상단에서 10% 위치 */
+          left: 50%;
+          transform: translateX(-50%); /* X축만 중앙 정렬 */
+          width: 90%;
+          max-width: 500px;
+          height: calc(100% - 20%); /* 상하 여백 10%씩 제외 */
+          min-height: 600px; /* 최소 높이 보장 */
+          background: var(--glass-bg);
+          backdrop-filter: blur(20px);
+          border-radius: 30px;
+          border: 1px solid var(--glass-border);
+          box-shadow: var(--shadow-light);
+          z-index: -1;
+        }
+
+        .question {
+          font-size: 1.6rem;
+          margin-bottom: 5rem;
+        }
+
+        .buttons {
+          margin-bottom: 5rem;
         }
       }
 
@@ -670,28 +683,11 @@
       @media (max-width: 400px) {
         .question {
           font-size: 1.1rem;
-          margin-top: -11rem;
+          margin-top: 0; /* 또는 -10px 정도로만 */
         }
         .buttons {
           align-items: center;
-          margin-top: -10px; /* 위로 10px 이동 */
-        }
-        .btn {
-          width: 70%;
-          min-width: 80px;
-          max-width: 200px;
-          margin: 0 auto;
-          padding-left: 0.5rem;
-          padding-right: 0.5rem;
-        }
-        .result {
-          font-size: 1rem;
-        }
-        .slide::before {
-          content: "";
-          position: absolute;
-          top: 37%;
-          height: 68%;
+          margin-top: 0; /* 또는 -5px 정도로만 */
         }
       }
     </style>
@@ -1111,5 +1107,30 @@
         </div>
       </div>
     </footer>
+    <!-- 카카오 배너 광고 (푸터 바로 위) -->
+    <div
+      style="
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        bottom: 56px;
+        left: 0;
+        z-index: 99998;
+      "
+    >
+      <ins
+        class="kakao_ad_area"
+        style="display: none"
+        data-ad-unit="DAN-dyddLLg4dLJwTgA3"
+        data-ad-width="320"
+        data-ad-height="50"
+      ></ins>
+    </div>
+    <script
+      type="text/javascript"
+      src="//t1.daumcdn.net/kas/static/ba.min.js"
+      async
+    ></script>
   </body>
 </html>
