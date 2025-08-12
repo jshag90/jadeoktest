@@ -514,7 +514,14 @@
       @media (max-width: 480px), (max-height: 667px) {
         .slide {
           min-height: calc(100vh - 55px);
-          padding-bottom: 30px; /* 기존 값에서 70px로 변경 */
+          padding-top: 4.5rem;
+          padding-bottom: 5rem; /* 기존 값에서 70px로 변경 */
+          justify-content: flex-start;
+        }
+        .slide::before {
+          min-height: 300px; /* 카드 배경 최소 높이 줄임 */
+          height: 65%; /* 카드 배경 높이도 줄임 */
+          top: 35%;
         }
         .container {
           min-height: calc(100vh - 55px);
@@ -535,7 +542,6 @@
           max-width: 200px;
           max-height: 250px;
         }
-
         .slide:last-child {
           padding-top: 1rem; /* 기존 값 유지 */
           padding-bottom: 70px; /* 기존 값에서 70px로 변경 */
@@ -999,7 +1005,7 @@
           navigator
             .share({
               title: "[자덕력 테스트]",
-              text: shareText
+              text: shareText,
             })
             .catch((err) => {
               console.log("공유 취소 또는 실패");
@@ -1009,7 +1015,6 @@
           copyToClipboard(shareText);
         }
       }
-
 
       function copyToClipboard(text) {
         const textToCopy =
