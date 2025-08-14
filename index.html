@@ -27,13 +27,13 @@
       name="naver-site-verification"
       content="f3e077ef88a458aee9e127cda3328c2ece62eb07"
     />
-    <script
+    <!-- <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6669682457787065"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap");
+      /*   @import url("https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap"); */
 
       * {
         box-sizing: border-box;
@@ -91,9 +91,9 @@
         flex: 0 0 100%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        padding: 2rem;
+        padding-top: 12rem; /* 위쪽만 2rem */
         position: relative;
         min-height: calc(100vh - 80px);
         overflow-y: auto;
@@ -102,12 +102,12 @@
       .slide::before {
         content: "";
         position: absolute;
-        top: 45%;
+        top: 38%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 90%;
         max-width: 500px;
-        height: 80%;
+        height: 70%;
         background: var(--glass-bg);
         backdrop-filter: blur(20px);
         border-radius: 30px;
@@ -525,12 +525,12 @@
         .slide::before {
           content: "";
           position: absolute;
-          top: 38%;
+          top: 35%;
           left: 50%;
           transform: translate(-50%, -50%);
           width: 90%;
           max-width: 500px;
-          height: 68%;
+          height: 60%;
           background: var(--glass-bg);
           backdrop-filter: blur(20px);
           border-radius: 30px;
@@ -682,12 +682,12 @@
 
       @media (max-width: 400px) {
         .question {
-          font-size: 1.1rem;
-          margin-top: 0; /* 또는 -10px 정도로만 */
+          font-size: 1rem;
+          margin-top: 6rem; /* 또는 -10px 정도로만 */
         }
         .buttons {
           align-items: center;
-          margin-top: 0; /* 또는 -5px 정도로만 */
+          margin-top: -2.5rem; /* 또는 -5px 정도로만 */
         }
       }
     </style>
@@ -1105,32 +1105,20 @@
         <div class="copyright">
           © 도담소프트(DoDamSoft) 2025. All Rights Reserved.
         </div>
+
+        <ins
+          class="kakao_ad_area"
+          style="display: none"
+          data-ad-unit="DAN-dyddLLg4dLJwTgA3"
+          data-ad-width="320"
+          data-ad-height="50"
+        ></ins>
+        <script
+          type="text/javascript"
+          src="//t1.daumcdn.net/kas/static/ba.min.js"
+          async
+        ></script>
       </div>
     </footer>
-    <!-- 카카오 배너 광고 (푸터 바로 위) -->
-    <div
-      style="
-        width: 100vw;
-        display: flex;
-        justify-content: center;
-        position: fixed;
-        bottom: 56px;
-        left: 0;
-        z-index: 99998;
-      "
-    >
-      <ins
-        class="kakao_ad_area"
-        style="display: none"
-        data-ad-unit="DAN-dyddLLg4dLJwTgA3"
-        data-ad-width="320"
-        data-ad-height="50"
-      ></ins>
-    </div>
-    <script
-      type="text/javascript"
-      src="//t1.daumcdn.net/kas/static/ba.min.js"
-      async
-    ></script>
   </body>
 </html>
