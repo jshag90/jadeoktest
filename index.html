@@ -27,14 +27,7 @@
       name="naver-site-verification"
       content="f3e077ef88a458aee9e127cda3328c2ece62eb07"
     />
-    <!-- <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6669682457787065"
-      crossorigin="anonymous"
-    ></script> -->
     <style>
-      /*   @import url("https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap"); */
-
       * {
         box-sizing: border-box;
       }
@@ -117,7 +110,7 @@
       }
 
       .question {
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 700;
         margin-bottom: 1rem;
         text-align: center;
@@ -354,7 +347,7 @@
         z-index: 99999;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
-        padding: 12px 0 8px 0;
+        padding: 3px 0 8px 0;
       }
 
       .footer-content {
@@ -458,7 +451,7 @@
       /* 반응형 디자인 */
       @media (max-width: 768px) {
         .question {
-          font-size: 1.6rem;
+          font-size: 1.4rem;
           margin-bottom: 2rem;
         }
 
@@ -525,7 +518,7 @@
         .slide::before {
           content: "";
           position: absolute;
-          top: 35%;
+          top: 33%;
           left: 50%;
           transform: translate(-50%, -50%);
           width: 90%;
@@ -539,12 +532,11 @@
           z-index: -1;
         }
 
-        .slide:last-child {
-          padding-bottom: 2.2rem;
+        .result-slide {
+          padding-bottom: 4.9rem; /* footer 높이 + 여유분 */
         }
 
-        /* 결과 슬라이드의 배경 조정 */
-        .slide:last-child::before {
+        .result-slide::before {
           position: absolute;
           top: 10%; /* 상단에서 10% 위치 */
           left: 50%;
@@ -562,7 +554,8 @@
         }
 
         .question {
-          font-size: 1.6rem;
+          font-size: 1.4rem;
+          margin-top: 3.5rem;
           margin-bottom: 5rem;
         }
 
@@ -690,6 +683,25 @@
           margin-top: -2.5rem; /* 또는 -5px 정도로만 */
         }
       }
+
+      /* 아이폰 XR (414x896) 전용 - 세로 긴 화면 */
+      @media (max-width: 430px) and (min-height: 800px) {
+        .slide {
+          justify-content: flex-end; /* 하단 정렬 */
+          padding-top: 0; /* 위 여백 제거 */
+          padding-bottom: 14.5rem; /* 버튼+question 하단 여백 확보 */
+        }
+
+        .question {
+          margin-top: 6rem;
+          font-size: 1.2rem;
+          margin-bottom: 5rem; /* 버튼 위에 약간 간격 */
+        }
+
+        .buttons {
+          margin-bottom: 17rem; /* 푸터나 광고와 겹치지 않게 */
+        }
+      }
     </style>
     <link rel="icon" href="bike.ico" type="image/x-icon" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -776,7 +788,7 @@
         </div>
       </div>
 
-      <div class="slide">
+      <div class="slide result-slide">
         <div id="capture-area">
           <h2 id="capture-title">🚴 자덕력 테스트</h2>
           <div class="result" id="result">결과 계산 중...</div>
