@@ -24,11 +24,49 @@
         min-height: 100vh;
         background: linear-gradient(45deg, #2d3748, #4a5568);
       }
+
+      .mobile-controls {
+        display: none; /* 기본적으로는 숨김 */
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none; /* 전체 컨테이너는 터치 이벤트 무시 */
+      }
+
+      .control-button {
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        pointer-events: auto; /* 버튼만 터치 이벤트 활성화 */
+        touch-action: manipulation; /* 더블탭 줌 방지 */
+      }
+
+      .left-button {
+        left: 0;
+      }
+
+      .right-button {
+        right: 0;
+      }
+
+      /* 모바일 기기에서만 컨트롤 표시 */
+      @media (max-width: 768px) {
+        .mobile-controls {
+          display: block;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="game-container">
       <canvas id="gameCanvas"></canvas>
+      <div class="mobile-controls">
+        <button class="control-button left-button" id="leftButton"></button>
+        <button class="control-button right-button" id="rightButton"></button>
+      </div>
     </div>
 
     <script>
@@ -820,6 +858,48 @@
 
       // 게임 시작
       gameLoop();
+
+      // 모바일 컨트롤 이벤트 처리
+      const leftButton = document.getElementById("leftButton");
+      const rightButton = document.getElementById("rightButton");
+
+      let touchLeft = false;
+      let touchRight = false;
+
+      leftButton.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        touchLeft = true;
+        keys["ArrowLeft"] = true;
+      });
+
+      leftButton.addEventListener("touchend", (e) => {
+        e.preventDefault();
+        touchLeft = false;
+        keys["ArrowLeft"] = false;
+      });
+
+      rightButton.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        touchRight = true;
+        keys["ArrowRight"] = true;
+      });
+
+      rightButton.addEventListener("touchend", (e) => {
+        e.preventDefault();
+        touchRight = false;
+        keys["ArrowRight"] = false;
+      });
+
+      // 터치 이벤트 중복 방지
+      document.addEventListener(
+        "touchmove",
+        (e) => {
+          if (touchLeft || touchRight) {
+            e.preventDefault();
+          }
+        },
+        { passive: false }
+      );
     </script>
   </body>
 </html>
