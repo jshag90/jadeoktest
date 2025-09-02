@@ -707,7 +707,88 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   </head>
   <body>
-    <header class="top-header">🚴 자덕력 테스트</header>
+    <header class="top-header">
+      🚴 자덕력 테스트
+      <button
+        id="menu-btn"
+        style="
+          position: absolute;
+          right: 20px;
+          top: 50%;
+          transform: translateY(-50%);
+          background: none;
+          border: none;
+          font-size: 2rem;
+          color: white;
+          cursor: pointer;
+        "
+        aria-label="메뉴 열기"
+      >
+        &#9776;
+      </button>
+      <nav
+        id="menu-nav"
+        style="
+          display: none;
+          position: absolute;
+          top: 80px;
+          right: 20px;
+          background: rgba(0, 0, 0, 0.95);
+          border-radius: 16px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+          padding: 1rem 2rem;
+          z-index: 10000;
+          min-width: 180px;
+        "
+      >
+        <ul style="list-style: none; margin: 0; padding: 0">
+          <li>
+            <a
+              href="./"
+              style="
+                color: white;
+                text-decoration: none;
+                font-weight: 600;
+                display: block;
+                padding: 0.5rem 0;
+              "
+              >자덕력 테스트</a
+            >
+          </li>
+          <li>
+            <a
+              href="./cycle-game.html"
+              style="
+                color: white;
+                text-decoration: none;
+                font-weight: 600;
+                display: block;
+                padding: 0.5rem 0;
+              "
+              >자덕력 미니게임</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <script>
+        const menuBtn = document.getElementById("menu-btn");
+        const menuNav = document.getElementById("menu-nav");
+        menuBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          menuNav.style.display =
+            menuNav.style.display === "block" ? "none" : "block";
+        });
+        document.addEventListener("click", function (e) {
+          if (
+            menuNav.style.display === "block" &&
+            !menuNav.contains(e.target) &&
+            e.target !== menuBtn
+          ) {
+            menuNav.style.display = "none";
+          }
+        });
+      </script>
+    </header>
 
     <div id="slider" class="container">
       <div class="slide">
